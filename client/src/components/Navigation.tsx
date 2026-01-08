@@ -22,7 +22,7 @@ export function Navigation() {
             <BrainCircuit size={18} />
           </div>
           <span className="font-display text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-            ML Cards
+            PocketML
           </span>
         </div>
         
