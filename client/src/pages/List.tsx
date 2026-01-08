@@ -68,14 +68,16 @@ export default function List() {
     <div className="min-h-screen bg-background flex flex-col">
       <Navigation />
 
-      <main className="flex-1 w-full max-w-5xl mx-auto p-4 md:p-8 pt-24">
+      <main className="flex-1 w-full max-w-5xl mx-auto p-4 md:p-8 pt-20">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">Library</h1>
             <p className="text-muted-foreground mt-2">Manage your collection of ML concepts</p>
           </div>
-          <CreateCardDialog />
+          <div className="flex-shrink-0">
+            <CreateCardDialog />
+          </div>
         </div>
 
         {/* Search & Stats Bar */}
