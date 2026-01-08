@@ -1,6 +1,7 @@
 import { useCards, useDeleteCard } from "@/hooks/use-cards";
 import { Navigation } from "@/components/Navigation";
 import { CreateCardDialog } from "@/components/CreateCardDialog";
+import { EditCardDialog } from "@/components/EditCardDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -16,7 +17,8 @@ import {
   Trash2, 
   Search, 
   Inbox,
-  ArrowUpDown
+  ArrowUpDown,
+  Edit
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -140,7 +142,20 @@ export default function List() {
                         </span>
                       </TableCell>
                       <TableCell className="text-right">
-                        <AlertDialog>
+                        <div className="flex items-center justify-end gap-2">
+                          <EditCardDialog 
+                            card={card}
+                            trigger={
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                            }
+                          />
+                          <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <Button 
                               variant="ghost" 
@@ -168,6 +183,7 @@ export default function List() {
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
