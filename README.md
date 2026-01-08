@@ -45,7 +45,3 @@ PocketML is a clean, interactive flashcard application designed to help beginner
 - `server/`: Express backend and storage logic
 - `shared/`: Shared TypeScript schemas and route definitions
 - `migrations/`: Database migration files
-
-## 📄 License
-
-MIT
