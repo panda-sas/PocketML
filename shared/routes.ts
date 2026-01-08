@@ -32,6 +32,16 @@ export const api = {
         400: errorSchemas.validation,
       },
     },
+    update: {
+      method: 'PATCH' as const,
+      path: '/api/cards/:id',
+      input: insertCardSchema.partial(),
+      responses: {
+        200: z.custom<typeof cards.$inferSelect>(),
+        400: errorSchemas.validation,
+        404: errorSchemas.notFound,
+      },
+    },
     delete: {
       method: 'DELETE' as const,
       path: '/api/cards/:id',

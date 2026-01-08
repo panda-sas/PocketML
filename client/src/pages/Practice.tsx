@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCards } from "@/hooks/use-cards";
 import { Flashcard } from "@/components/Flashcard";
 import { Button } from "@/components/ui/button";
+import { EditCardDialog } from "@/components/EditCardDialog";
 import { Navigation } from "@/components/Navigation";
 import { 
   ArrowLeft, 
@@ -9,7 +10,8 @@ import {
   Shuffle, 
   RefreshCw,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  Edit
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -120,6 +122,16 @@ export default function Practice() {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span>Study Mode</span>
+              {currentCard && (
+                <EditCardDialog 
+                  card={currentCard} 
+                  trigger={
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0 ml-2 hover:bg-background/20">
+                      <Edit className="h-3 w-3" />
+                    </Button>
+                  }
+                />
+              )}
             </div>
           </div>
 
