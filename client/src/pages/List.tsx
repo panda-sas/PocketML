@@ -18,7 +18,9 @@ import {
   Search, 
   Inbox,
   ArrowUpDown,
-  Edit
+  Edit,
+  X,
+  GraduationCap
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -33,12 +35,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { type Card } from "@shared/schema";
 
 export default function List() {
   const { data: cards, isLoading } = useCards();
   const deleteCard = useDeleteCard();
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const handleDelete = (id: number) => {
     deleteCard.mutate(id, {
@@ -131,7 +136,11 @@ export default function List() {
                 </TableHeader>
                 <TableBody>
                   {filteredCards?.map((card) => (
-                    <TableRow key={card.id} className="hover:bg-muted/30 transition-colors">
+                    <TableRow 
+                      key={card.id} 
+                      className="hover:bg-muted/30 transition-colors cursor-pointer group/row"
+                      onClick={() => setSelectedCard(card)}
+                    >
                       <TableCell className="font-medium text-foreground">
                         {card.term}
                       </TableCell>
@@ -143,7 +152,7 @@ export default function List() {
                           {card.category}
                         </span>
                       </TableCell>
-                      <TableCell className="text-right">
+                      <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-end gap-2">
                           <EditCardDialog 
                             card={card}
@@ -195,6 +204,52 @@ export default function List() {
           )}
         </div>
       </main>
+
+      <Dialog open={!!selectedCard} onOpenChange={(open) => !open && setSelectedCard(null)}>
+        <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-transparent shadow-none">
+          {selectedCard && (
+            <div className="relative p-4 sm:p-6 w-full animate-in fade-in zoom-in duration-300">
+              <div className="absolute top-2 right-2 z-50">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => setSelectedCard(null)}
+                  className="rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-3xl shadow-2xl p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[400px]">
+                {/* Decorative circles */}
+                <div className="absolute top-8 right-8 w-4 h-4 rounded-full bg-white/20" />
+                <div className="absolute bottom-12 left-12 w-8 h-8 rounded-full bg-white/10" />
+                
+                <div className="relative z-10 w-full">
+                  <div className="flex justify-center mb-6">
+                     <span className="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold tracking-wider uppercase backdrop-blur-md border border-white/10">
+                       {selectedCard.category}
+                    </span>
+                  </div>
+                  
+                  <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-6">
+                    {selectedCard.term}
+                  </h2>
+
+                  <p className="text-lg sm:text-xl font-medium leading-relaxed font-sans text-white/95">
+                    {selectedCard.definition}
+                  </p>
+
+                  <div className="mt-8 pt-6 border-t border-white/20 flex items-center justify-center gap-2 text-white/60 text-sm">
+                    <GraduationCap className="w-4 h-4" />
+                    <span>Definition</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
