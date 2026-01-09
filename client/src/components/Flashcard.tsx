@@ -12,18 +12,24 @@ interface FlashcardProps {
 export function Flashcard({ card, isFlipped, onFlip }: FlashcardProps) {
   return (
     <div 
-      className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-w-2xl mx-auto cursor-pointer perspective-1000 group"
+      className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-w-2xl mx-auto cursor-pointer group"
+      style={{ perspective: '1000px' }}
       onClick={onFlip}
     >
       <motion.div
-        className="w-full h-full relative preserve-3d"
+        className="w-full h-full relative"
+        style={{ transformStyle: 'preserve-3d' }}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
       >
         {/* FRONT */}
         <div 
-          className="absolute inset-0 backface-hidden"
-          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}
+          className="absolute inset-0"
+          style={{ 
+            backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(0deg)'
+          }}
         >
           <div className="h-full w-full bg-card rounded-3xl border border-border shadow-xl shadow-black/5 p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden">
             {/* Decorative background element */}
@@ -47,8 +53,12 @@ export function Flashcard({ card, isFlipped, onFlip }: FlashcardProps) {
 
         {/* BACK */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180"
-          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          className="absolute inset-0"
+          style={{ 
+            backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden', 
+            transform: 'rotateY(180deg)' 
+          }}
         >
           <div className="h-full w-full bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-3xl shadow-xl shadow-primary/25 p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden">
             {/* Decorative circles */}
