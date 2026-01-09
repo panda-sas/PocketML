@@ -16,12 +16,15 @@ export function Flashcard({ card, isFlipped, onFlip }: FlashcardProps) {
       onClick={onFlip}
     >
       <motion.div
-        className="w-full h-full relative preserve-3d transition-all duration-500 ease-out-back"
+        className="w-full h-full relative preserve-3d"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
       >
         {/* FRONT */}
-        <div className="absolute inset-0 backface-hidden">
+        <div 
+          className="absolute inset-0 backface-hidden"
+          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}
+        >
           <div className="h-full w-full bg-card rounded-3xl border border-border shadow-xl shadow-black/5 p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden">
             {/* Decorative background element */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -43,7 +46,10 @@ export function Flashcard({ card, isFlipped, onFlip }: FlashcardProps) {
         </div>
 
         {/* BACK */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180">
+        <div 
+          className="absolute inset-0 backface-hidden rotate-y-180"
+          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+        >
           <div className="h-full w-full bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-3xl shadow-xl shadow-primary/25 p-8 sm:p-12 flex flex-col items-center justify-center text-center relative overflow-hidden">
             {/* Decorative circles */}
             <div className="absolute top-8 right-8 w-4 h-4 rounded-full bg-white/20" />
