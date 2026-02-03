@@ -1,8 +1,8 @@
-# PocketML 🧠
+# PocketML 
 
 PocketML is a clean, interactive flashcard application designed to help beginners master machine learning fundamentals. Practice core concepts through an engaging card-flipping interface or manage your collection in the library.
 
-## ✨ Features
+## Features
 
 - **Interactive Practice**: Study ML concepts with smooth-flipping flashcards.
 - **Card Library**: View, search, and manage your entire collection of ML terms.
@@ -11,7 +11,7 @@ PocketML is a clean, interactive flashcard application designed to help beginner
 - **Modern UI**: Clean, responsive design with dark mode support.
 - **SEO Optimized**: Fully branded with custom metadata for better visibility.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Frontend**: React, TypeScript, Vite, Wouter (Routing)
 - **Backend**: Node.js, Express
@@ -20,7 +20,7 @@ PocketML is a clean, interactive flashcard application designed to help beginner
 - **Animations**: Framer Motion
 - **State Management**: TanStack Query (React Query)
 
-## 🛠️ Getting Started
+## Getting Started
 
 1. **Install Dependencies**:
    ```bash
@@ -39,7 +39,7 @@ PocketML is a clean, interactive flashcard application designed to help beginner
    ```
    The app will be available at `http://localhost:5000`.
 
-## 📁 Project Structure
+## Project Structure
 
 - `client/`: React frontend application
 - `server/`: Express backend and storage logic
